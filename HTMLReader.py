@@ -7,6 +7,6 @@ class HTMLReader:
         self.file = open(self.fileName, encoding='utf-8-sig', errors='ignore')
 
 
-
-    def printHtml(self):
-        print(self.file.read())
+    # Metodo que devuelve todito el html del archivo
+    def getHtml(self):
+        return self.file.read()

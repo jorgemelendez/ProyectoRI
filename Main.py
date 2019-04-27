@@ -12,7 +12,7 @@ def main():
         print(title)
         html = HTMLReader(title)
         title = toy.getTitle()
-        html.printHtml()
+        html.getHtml()
 
 
 if __name__ == '__main__':
