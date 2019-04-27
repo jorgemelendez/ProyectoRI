@@ -44,6 +44,21 @@ class Rules:
                                 re.I)
                          )
 
+    def changeTick(selfs, stringDoc):
+        docChangeTick = stringDoc.replace('&aacute;', 'a')
+        docChangeTick = docChangeTick.replace('&Aacute;', 'a')
+        docChangeTick = docChangeTick.replace('&eacute;', 'e')
+        docChangeTick = docChangeTick.replace('&Eacute;', 'e')
+        docChangeTick = docChangeTick.replace('&iacute;', 'i')
+        docChangeTick = docChangeTick.replace('&Iacute;', 'i')
+        docChangeTick = docChangeTick.replace('&oacute;', 'o')
+        docChangeTick = docChangeTick.replace('&Oacute;', 'o')
+        docChangeTick = docChangeTick.replace('&uacute;', 'u')
+        docChangeTick = docChangeTick.replace('&Uacute;', 'u')
+        docChangeTick = docChangeTick.replace('&ntilde;', 'n')
+        docChangeTick = docChangeTick.replace('&Ntilde;', 'n')
+        return docChangeTick
+
     #Regla para eliminar palabras que son alfanumericas
     def removeIfStartWithNumber(self, stringDoc):
         #Hay que dejar ese espacio al final para que indique que es hasta que finalizo la palabra
@@ -60,7 +75,7 @@ class Rules:
         return re.sub(r'\r?\n|\r|\n', ' ', stringDoc)
 
     def removePunctuation(self, stringDoc):
-        return re.sub(r'[.,!?¿¡;:/“”`\']', ' ', stringDoc)
+        return re.sub(r'[.,!?¿¡;\-:/“”`\']', ' ', stringDoc)
 
     def removeStyle(self, stringDoc):
         return re.sub(r'(?s)<style(.*?)>(.*?)<\/style>', ' ', stringDoc)
@@ -76,6 +91,7 @@ class Rules:
         stringDoc = self.removeTagsHTML(stringDoc)
         stringDoc = self.removeComments(stringDoc)
         stringDoc = self.removeNbsp(stringDoc)
+        stringDoc = self.changeTick(stringDoc)
         stringDoc = self.removePunctuation(stringDoc)
         stringDoc = self.removeEnters(stringDoc)
         stringDoc = self.removeCSS(stringDoc)
