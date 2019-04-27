@@ -8,11 +8,11 @@ def main():
     toy = URLsReader()
 
     title = toy.getTitle()
-    while(title is not None):
-        print(title)
-        html = HTMLReader(title)
-        title = toy.getTitle()
-        html.getHtml()
+    #while(title is not None):
+    print(title)
+    html = HTMLReader(title)
+    title = toy.getTitle()
+    print(html.getHtml())
 
 
 if __name__ == '__main__':
