@@ -22,8 +22,10 @@ def main():
     docWordCount = DocWordCounter(html, words)
 
     # Separa las palabras y las agrega en un diccionario por cada documento.
+    docWordCount.generateStopWordsDict()
     docWordCount.separateWords()
     docWordCount.generateDict()
+
 
     # Obtiene el siguiente Documento de HTML
     title = urlDoc.getTitle()

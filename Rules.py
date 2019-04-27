@@ -8,6 +8,7 @@ from unicodedata import normalize
 class Rules:
     maxLength = 30
 
+
     #Regla para eliminar las etiquetas html
     def removeTagsHTML(self, stringDoc):
         return re.sub(r'<[^>]*?>', ' ', stringDoc)
