@@ -10,11 +10,20 @@ class Rules:
 
     #Regla para eliminar las etiquetas html
     def removeTagsHTML(self, stringDoc):
-        return re.sub(r'<[^>]*?>', '', stringDoc)
+        return re.sub(r'<[^>]*?>', ' ', stringDoc)
+
+    def removeComments(self, stringDoc):
+        return re.sub(r'(/\*(.|\n)*?\*/|<!--(.*\n*)*-->)', ' ', stringDoc)
+
+    def removeNbsp(self, stringDoc):
+        return re.sub(r'&nbsp;', ' ', stringDoc)
+
+    def removeCSS(self, stringDoc):
+        return re.sub(r'(?s)<style>(.*?)<\/style>', ' ', stringDoc)
 
     #Regla para eliminar palabras de mas de 30 caracteres
     def removeMaxLength(self, stringDoc):
-        return re.sub(r'[^> ]{30,}', '', stringDoc)
+        return re.sub(r'[^> ]{30,}', ' ', stringDoc)
 
     #Regla para pasar el texto a minuscula
     def toLowerCase(self, stringDoc):
@@ -22,7 +31,8 @@ class Rules:
 
     #Regla para quitar caracteres que no sean a-z, A-Z, 0-9, _
     def removeCharactersInvalid(self, stringDoc):
-        return re.sub(r'[^\wa-zA-Z0-9_ ]', '', stringDoc)
+        #return re.sub(r'[^\wa-zA-Z0-9]*[a-zA-Z0-9]*[^\wa-zA-Z0-9]*', '', stringDoc)
+        return re.sub(r'[A-Za-z0-9]*[!@#$%^&*(),.?":;{}|\\<>][\w]*', ' ', stringDoc)
 
     #Regla para quitar tildes
     def removeTick(self, stringDoc):
@@ -37,27 +47,58 @@ class Rules:
     #Regla para eliminar palabras que son alfanumericas
     def removeIfStartWithNumber(self, stringDoc):
         #Hay que dejar ese espacio al final para que indique que es hasta que finalizo la palabra
-        return re.sub(r'[\d]+[a-zA-Z_]+? ', '', stringDoc)
+        return re.sub(r'[\d]+[a-zA-Z_]+? ', ' ', stringDoc)
 
     #Regla para dejar los numeros hasta el 999,999
     def removeNumberBiggerThan(self, stringDoc):
-        return re.sub(r'[\d]{7,}(,[\d]+)?', '', stringDoc)
+        return re.sub(r'[\d]{7,}(,[\d]+)?', ' ', stringDoc)
+
+    def removeWhiteSpace(self, stringDoc):
+        return re.sub(r'\s+', ' ', stringDoc)
+
+    def removeEnters(self, stringDoc):
+        return re.sub(r'\r?\n|\r|\n', ' ', stringDoc)
+
+    def removePunctuation(self, stringDoc):
+        return re.sub(r'[.,!?¿¡;:/“”`\']', ' ', stringDoc)
+
+    def removeStyle(self, stringDoc):
+        return re.sub(r'(?s)<style(.*?)>(.*?)<\/style>', ' ', stringDoc)
+
+    def removeScript(self, stringDoc):
+        return re.sub(r'(?s)<script(.*?)>(.*?)<\/script>', ' ', stringDoc)
+
+
+    def applyRules(self, stringDoc):
+        stringDoc = self.toLowerCase(stringDoc)
+        stringDoc = self.removeStyle(stringDoc)
+        stringDoc = self.removeScript(stringDoc)
+        stringDoc = self.removeTagsHTML(stringDoc)
+        stringDoc = self.removeComments(stringDoc)
+        stringDoc = self.removeNbsp(stringDoc)
+        stringDoc = self.removePunctuation(stringDoc)
+        stringDoc = self.removeEnters(stringDoc)
+        stringDoc = self.removeCSS(stringDoc)
+        stringDoc = self.removeMaxLength(stringDoc)
+        stringDoc = self.removeCharactersInvalid(stringDoc)
+        stringDoc = self.removeTick(stringDoc)
+        stringDoc = self.removeIfStartWithNumber(stringDoc)
+        stringDoc = self.removeNumberBiggerThan(stringDoc)
+        stringDoc = self.removeWhiteSpace(stringDoc)
+        return stringDoc
 
 def main():
     toy = URLsReader()
-
     title = toy.getTitle()
-    #print(title)
-    html = HTMLReader(title)
-    html.printHtml()
-
-
-    rules = Rules()
-    doc = "55555 666666 7777777 333 4444 666666,99 999999,99999 1000000,00"
-    print(doc)
-    print("\n\n")
-    print(rules.removeNumberBiggerThan(doc))
-
+    while (title is not None):
+        print("\n\n")
+        print(title)
+        html = HTMLReader(title)
+        rules = Rules()
+        doc = html.getHtml()
+        #print(doc)
+        print(rules.applyRules(doc))
+        title = toy.getTitle()
 
 if __name__ == '__main__':
     main()

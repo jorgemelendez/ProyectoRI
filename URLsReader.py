@@ -7,7 +7,6 @@ class URLsReader:
     # Metodo utilizado para obtener el titulo de los archivos.
     def getTitle(self):
         linea = self.file.readline()
-        print(linea)
         titulo = linea.split()
         if titulo:
             # Se quita el caracter '\ufeff' ya que es parte
