@@ -12,7 +12,6 @@ class HTMLReader:
     # Metodo que devuelve todito el html del archivo
     def getHtml(self):
         read=self.file.read()
-        print(chardet.detect(self.file.read()))
         try:
             html = read.decode(chardet.detect(read)["encoding"])
         except:
