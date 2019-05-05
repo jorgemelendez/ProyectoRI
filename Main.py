@@ -7,7 +7,6 @@ from HTMLReader import *
 def main():
     urlDoc = URLsReader()
     rules = Rules()
-
     title = urlDoc.getTitle()
     while(title is not None):
         html = HTMLReader(title)
