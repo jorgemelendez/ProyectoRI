@@ -7,18 +7,16 @@ class URLsReader:
         read=self.file.read()
         self.urls=read.decode(chardet.detect(read)['encoding']).split("\n")
 
-
     # Metodo utilizado para obtener el titulo de los archivos.
     def getTitle(self):
-        linea = self.urls.pop()
-        titulo = linea.split()
+        linea = self.urls.pop(0)
+        titulo = linea.split(" ")
         if titulo:
             # Se quita el caracter '\ufeff' ya que es parte
             # del BOM del encoding del documento que se metia en los strings.
             retValue = titulo[0] # Devuelve el titulo nada mas, por ahora el URL no nos interesa.
         else:
             retValue = None       # Manera contraria devuelve un null para que la otra clase lo maneje.
-        print(retValue)
         return retValue
 
     def closeFile(self):
