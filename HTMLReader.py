@@ -12,6 +12,9 @@ class HTMLReader:
     def getHtml(self):
         read=self.file.read()
         print(chardet.detect(self.file.read()))
-        html = read.decode(chardet.detect(read)['encoding'])
-        print(html)
+        try:
+            html = read.decode(chardet.detect(read)['encoding'])
+        except:
+            html = read.decode("ISO-8859-1")
+        #print(html)
         return html
