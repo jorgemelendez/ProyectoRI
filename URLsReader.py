@@ -1,12 +1,16 @@
+import chardet
 class URLsReader:
     def __init__(self):
         # Se tiene que cambiar el tipo de encoding del archivo y
         # se tiene que ignorar ciertos errores de caracteres que dice que no existen.
         self.file = open('./Coleccion/URLs.txt', "rb")
+        read=self.file.read()
+        self.urls=read.decode(chardet.detect(read)['encoding']).split("\n")
+
 
     # Metodo utilizado para obtener el titulo de los archivos.
     def getTitle(self):
-        linea = self.file.readline()
+        linea = self.urls.pop()
         titulo = linea.split()
         if titulo:
             # Se quita el caracter '\ufeff' ya que es parte
@@ -14,6 +18,7 @@ class URLsReader:
             retValue = titulo[0] # Devuelve el titulo nada mas, por ahora el URL no nos interesa.
         else:
             retValue = None       # Manera contraria devuelve un null para que la otra clase lo maneje.
+        print(retValue)
         return retValue
 
     def closeFile(self):

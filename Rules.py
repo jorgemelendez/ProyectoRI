@@ -83,7 +83,8 @@ class Rules:
 
     def removeScript(self, stringDoc):
         return re.sub(r'(?s)<script(.*?)>(.*?)<\/script>', ' ', stringDoc)
-
+    def removeHead(self, stringDoc):
+        return re.sub(r'<head.*?<\/head>', ' ', stringDoc)
 
     def applyRules(self, stringDoc):
         stringDoc = self.toLowerCase(stringDoc)
@@ -102,6 +103,7 @@ class Rules:
         stringDoc = self.removeIfStartWithNumber(stringDoc)
         stringDoc = self.removeNumberBiggerThan(stringDoc)
         stringDoc = self.removeWhiteSpace(stringDoc)
+        stringDoc = self.removeHead(stringDoc)
         return stringDoc
 
 def main():

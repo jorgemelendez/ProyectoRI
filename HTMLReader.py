@@ -1,8 +1,8 @@
+import chardet
 class HTMLReader:
     def __init__(self, docName):
-        docName = str(docName, 'utf-8-sig')
         self.fileName = './Coleccion/' + docName
-
+        print(self.fileName)
         # Se tiene que cambiar el tipo de encoding del archivo y
         # se tiene que ignorar ciertos errores de caracteres que dice que no existen.
         self.file = open(self.fileName, "rb")
@@ -10,5 +10,8 @@ class HTMLReader:
 
     # Metodo que devuelve todito el html del archivo
     def getHtml(self):
-        html = self.file.read().decode("ISO-8859-1")
+        read=self.file.read()
+        print(chardet.detect(self.file.read()))
+        html = read.decode(chardet.detect(read)['encoding'])
+        print(html)
         return html
