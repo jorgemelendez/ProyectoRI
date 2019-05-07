@@ -11,6 +11,7 @@ def main():
     #while(title is not None):
     while title is not None:
         html = HTMLReader(title)
+        print(title)
         #Obtiene tod o el HTML del documento.
         #if not title in ["turismoespacial9.html","AM8.html","AM5.html"]:
         htmlString = html.getHtml()
