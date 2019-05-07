@@ -2,6 +2,7 @@ class Frecuencias:
 
     def __init__(self):
         # Diccionario que guarda la palabra y la suma de las veces que sale en los documentos.
+        self.numDocs = 250
         self.dictionary = dict()
 
 
@@ -16,18 +17,15 @@ class Frecuencias:
         # Buscamos la plabra con mayor frecuencia del documento.
         for word in dictionary:
 
-            # Revisa que el diccionario general tenga la palabra y suma la cantidad que tiene
-            # o sino la agrega.
+            # Revisa que el diccionario general tenga la palabra y suma si aparece en un documento.
             if word in self.dictionary:
                 value = self.dictionary[word]
                 print(word)
                 print(dictionary[word])
-                value += dictionary[word]
-                print(value)
-                print('-----------')
+                value += 1
                 self.dictionary[word] = value
             else:
-                self.dictionary[word] = dictionary[word]
+                self.dictionary[word] = 1
 
             # Busca la palabra con mayor peso en el documento
             if (dictionary[word] > highestWordCount):
