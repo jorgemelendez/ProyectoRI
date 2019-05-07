@@ -10,8 +10,6 @@ def main():
     title = urlDoc.getTitle()
     while(title is not None):
         html = HTMLReader(title)
-
-        # Obtiene tod o el HTML del documento.
         htmlString = html.getHtml()
 
         # Devuelve en un string todas las palabras del documento
