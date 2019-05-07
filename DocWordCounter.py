@@ -31,5 +31,6 @@ class DocWordCounter:
                 else:
                     # Caso en que no exista la palabra se agrega al diciconario.
                     self.dictionary[word] = 1
+        print(self.dictionary)
         return self.dictionary
 
