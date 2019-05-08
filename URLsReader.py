@@ -2,7 +2,7 @@ class URLsReader:
     def __init__(self):
         # Se tiene que cambiar el tipo de encoding del archivo y
         # se tiene que ignorar ciertos errores de caracteres que dice que no existen.
-        self.file = open('./Coleccion/URLs.txt', "rb")
+        self.file = open('./URLs.txt', "rb")
 
     # Metodo utilizado para obtener el titulo de los archivos.
     def getTitle(self):

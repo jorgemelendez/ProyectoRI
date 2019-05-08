@@ -1,8 +1,3 @@
-from Rules import *
-from DocWordCounter import *
-from URLsReader import *
-from HTMLReader import *
-from Frecuencias import *
 class FileGenerator:
     numberCharacteresTerm = 30
     numberCharacteresFreq = 12
@@ -30,8 +25,10 @@ class FileGenerator:
     # 1 espacio
     # 20 espacios para la frecuencia normalizada
     def tokGenerate(self, fileName, dictFreq, dictFreqNorm):
+        fileSave = './DocumentosProcesados/' + fileName + '.tok'
+        file = open(fileSave, 'w')
         for word in sorted(dictFreq.keys()):
-            print(self.lineTok(word, dictFreq[word], dictFreqNorm[word]))
+            file.write(self.lineTok(word, dictFreq[word], dictFreqNorm[word]))
 
     # Funcion que crea una linea del archivo
     def lineVocabulary(self, term, numberDocument, freqInv):
@@ -45,54 +42,7 @@ class FileGenerator:
     # 1 espacio en blanco
     # 20 caracteres para la frecuencia inversa
     def vocabularyGenerate(self, fileName, dictFreq):
+        fileSave = './DocumentosProcesados/' + fileName + '.txt'
+        file = open(fileSave, 'w')
         for word in sorted(dictFreq.keys()):
-            print(self.lineVocabulary(word, dictFreq[word].getNumDocs(), dictFreq[word].getFrecInversa()))
-
-    # Metodo para escribir archivos
-    def writeFile(self, pathAndNameFile, text):
-        file = open(pathAndNameFile, 'w')
-        file.write(text)
-
-def main():
-    urlDoc = URLsReader()
-    rules = Rules()
-
-    title = urlDoc.getTitle()
-    freq = Frecuencias()
-
-    # while (title is not None):
-    html = HTMLReader(title)
-
-    # Obtiene tod o el HTML del documento.
-    htmlString = html.getHtml()
-
-    # Devuelve en un string todas las palabras del documento
-    words = rules.applyRules(htmlString)
-
-    # Se crea el objeto DocWord que se envia el titulo del archivo y el string de palabras
-    docWordCount = DocWordCounter(html, words)
-
-    # Separa las palabras y las agrega en un diccionario por cada documento.
-    docWordCount.generateStopWordsDict()
-    docWordCount.separateWords()
-    wordDict = docWordCount.generateDict()
-
-    # print(wordDict)
-
-    # Tiene el diccionario con las frecuencias normalizadas de cada palabra por documento.
-    freqDict = freq.generateFrequency(wordDict)
-    # print(freqDict)
-
-    # Obtiene el siguiente Documento de HTML
-    title = urlDoc.getTitle()
-
-    freqInv =  freq.generateVocabDic()
-
-    generador = FileGenerator()
-    generador.tokGenerate(title, wordDict, freqDict)
-    print('\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n')
-    generador.vocabularyGenerate(title, freqInv)
-
-
-if __name__ == '__main__':
-    main()
+            file.write(self.lineVocabulary(word, dictFreq[word].getNumDocs(), dictFreq[word].getFrecInversa()))
