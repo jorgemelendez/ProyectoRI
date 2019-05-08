@@ -1,6 +1,8 @@
 import re
+import string
 from URLsReader import *
 from HTMLReader import *
+
 
 from unicodedata import normalize
 
@@ -84,6 +86,8 @@ class Rules:
     def removeScript(self, stringDoc):
         return re.sub(r'(?s)<script(.*?)>(.*?)<\/script>', ' ', stringDoc)
 
+    def removeLastPass(self, stringDoc):
+        return re.sub(r'(?![\sA-Za-za-z0-9]).*', ' ', stringDoc)
 
     def applyRules(self, stringDoc):
         stringDoc = self.toLowerCase(stringDoc)
@@ -101,6 +105,7 @@ class Rules:
         stringDoc = self.removeTick(stringDoc)
         stringDoc = self.removeIfStartWithNumber(stringDoc)
         stringDoc = self.removeNumberBiggerThan(stringDoc)
+        stringDoc = self.removeLastPass(stringDoc)
         stringDoc = self.removeWhiteSpace(stringDoc)
         return stringDoc
 
