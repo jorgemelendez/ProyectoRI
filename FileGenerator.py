@@ -21,7 +21,7 @@ class FileGenerator:
 
     # Funcion que crea una linea del archivo
     def lineTok(self, term, freq, freqNorm):
-        return self.formatNumberCharacters(self.numberCharacteresTerm, term) + ' ' + self.formatNnumberToString(self.numberCharacteresFreq,freq) + ' ' + self.formatNnumberToString(self.numberCharacteresFreqNorm, freqNorm)
+        return self.formatNumberCharacters(self.numberCharacteresTerm, term) + ' ' + self.formatNnumberToString(self.numberCharacteresFreq,freq) + ' ' + self.formatNnumberToString(self.numberCharacteresFreqNorm, freqNorm)+'\n'
 
     # Metodo que generar archivo .tok
     # 30 caracteres para el termino
@@ -37,7 +37,7 @@ class FileGenerator:
     def lineVocabulary(self, term, numberDocument, freqInv):
         return self.formatNumberCharacters(self.numberCharacteresTerm, term) + ' ' + self.formatNnumberToString(
             self.numberCharacteresNumberDocument, numberDocument) + ' ' + self.formatNnumberToString(self.numberCharacteresFreqInv,
-                                                                                     freqInv)
+                                                                                     freqInv)+'\n'
     # Metodo que genera el archivo vocabulario
     # 30 caracteres termino
     # 1 espacio
@@ -47,6 +47,11 @@ class FileGenerator:
     def vocabularyGenerate(self, fileName, dictFreq):
         for word in sorted(dictFreq.keys()):
             print(self.lineVocabulary(word, dictFreq[word].getNumDocs(), dictFreq[word].getFrecInversa()))
+
+    # Metodo para escribir archivos
+    def writeFile(self, pathAndNameFile, text):
+        file = open(pathAndNameFile, 'w')
+        file.write(text)
 
 def main():
     urlDoc = URLsReader()
