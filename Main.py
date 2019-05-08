@@ -33,13 +33,12 @@ def main():
 
         # Tiene el diccionario con las frecuencias normalizadas de cada palabra por documento.
         freqDict = freq.generateFrequency(wordDict)
-        #print(freqDict)
-
 
 
         # Obtiene el siguiente Documento de HTML
         title = urlDoc.getTitle()
 
+    # Genera el diccionario para obtener los datos para el vocabulario.
     freq.generateVocabDic()
 
 
