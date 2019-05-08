@@ -1,3 +1,16 @@
+import math
+
+class TuplaVocabl:
+    def __init__(self, numDocs, frecInversa):
+        self.numDocs = numDocs
+        self.frecInversa = frecInversa
+
+    def getNumDocs(self):
+        return self.numDocs
+
+    def getFrecInversa(self):
+        return self.frecInversa
+
 class Frecuencias:
 
     def __init__(self):
@@ -20,8 +33,6 @@ class Frecuencias:
             # Revisa que el diccionario general tenga la palabra y suma si aparece en un documento.
             if word in self.dictionary:
                 value = self.dictionary[word]
-                print(word)
-                print(dictionary[word])
                 value += 1
                 self.dictionary[word] = value
             else:
@@ -39,10 +50,26 @@ class Frecuencias:
         return freqDict
 
 
-    # Metodo que agrega las palabras al diccionario general y suma las veces que aparecen.
-    def generateDict(self):
-        return 0
+    def generateVocabDic(self):
+        vocabDict = dict()
+
+        for word in self.dictionary:
+
+            #Numero de veces que aparece el termino en el doc.
+            numTermino = self.dictionary[word]
+
+            # Generamos la frecuencia inversa.
+            frecInversa = math.log(self.numDocs/self.dictionary[word])
+
+            # Creamos el objeto que se guarda en el value.
+            tuplaVocab = TuplaVocabl(numTermino, frecInversa)
+
+            vocabDict[word] = tuplaVocab
+            print(word, numTermino, frecInversa)
+
+        return vocabDict
 
 
+    # Metodo que devuelve el diccionar de frecuecias normalizadas.
     def getDictionary(self):
-        return self.dictionary['autor']
+        return self.dictionary
