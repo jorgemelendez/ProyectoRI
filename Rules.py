@@ -1,9 +1,4 @@
 import re
-import string
-from URLsReader import *
-from HTMLReader import *
-
-
 from unicodedata import normalize
 
 # Clase para implementar las reglas que se va a utilizar
@@ -108,19 +103,3 @@ class Rules:
         stringDoc = self.removeLastPass(stringDoc)
         stringDoc = self.removeWhiteSpace(stringDoc)
         return stringDoc
-
-def main():
-    toy = URLsReader()
-    title = toy.getTitle()
-    while (title is not None):
-        print("\n\n")
-        print(title)
-        html = HTMLReader(title)
-        rules = Rules()
-        doc = html.getHtml()
-        #print(doc)
-        print(rules.applyRules(doc))
-        title = toy.getTitle()
-
-if __name__ == '__main__':
-    main()
