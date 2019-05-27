@@ -32,8 +32,10 @@ class FileGenerator:
         fileSave = './DocumentosProcesados/tok/' + fileName + '.tok'
         file = open(fileSave, 'w')
         for word in sorted(dictFreq.keys()):
+            #if word == '1065':
+            #    print(word + ' la palabra esta en el doc ' + fileName)
             file.write(self.lineTok(word, dictFreq[word], dictFreqNorm[word]))
-        print(fileName + ".tok generado")
+        #print(fileName + ".tok generado")
 
     # Funcion que crea una linea del archivo vocabulario
     def lineVocabulary(self, term, numberDocument, freqInv):
@@ -51,7 +53,7 @@ class FileGenerator:
         file = open(fileSave, 'w')
         for word in sorted(dictFreq.keys()):
             file.write(self.lineVocabulary(word, dictFreq[word].getNumDocs(), dictFreq[word].getFrecInversa()))
-        print("vocabulario.txt generado")
+        #print("vocabulario.txt generado")
 
     # Funcion que crea una linea del archivo .wtd
     def lineWtd(self, term, peso):
@@ -66,8 +68,10 @@ class FileGenerator:
         fileSave = './DocumentosProcesados/wtd/' + fileName + '.wtd'
         file = open(fileSave, 'w')
         for word in sorted(dictWeight.keys()):
+            #if word == '1065':
+            #    print(word + ' la palabra esta en el doc ' + fileName)
             file.write(self.lineWtd(word, dictWeight[word]))
-        print(fileName + ".wtd generado")
+        #print(fileName + ".wtd generado")
 
     # Funcion que crea una linea del archivo postings
     def linePostings(self, term, alias, peso):
@@ -85,8 +89,10 @@ class FileGenerator:
         fileSave = './DocumentosProcesados/postings/' + fileName + '.txt'
         file = open(fileSave, 'w')
         for wordFile in sorted(dictWeight.keys()):
+            if wordFile[0] == '1065':
+               print(wordFile[0] + ' la palabra esta en el doc ' + fileName)
             file.write(self.linePostings(wordFile[0], wordFile[1], dictWeight[wordFile]))
-        print(fileName + "postings.txt generado")
+        #print(fileName + ".txt generado")
 
     # Funcion que crea una linea del archivo indice
     def lineIndice(self, term, posInitial, entrys):
@@ -105,4 +111,4 @@ class FileGenerator:
         file = open(fileSave, 'w')
         for word in sorted(dictPositngs.keys()):
             file.write(self.linePostings(word, dictPositngs[word][0], dictPositngs[word][1]))
-        print(fileName + "indice.txt generado")
+        #print(fileName + ".txt generado")

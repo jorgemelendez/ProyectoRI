@@ -10,7 +10,6 @@ class TokReader:
         string = self.file.read()
         self.fileLines = string.split("\n")
 
-
     # Metodo que devuelve el archivo
     def getLinesTok(self):
         return self.fileLines
@@ -20,16 +19,20 @@ class TokReader:
     # Valor: Frecuencia, FrecuenciaNormalizada
     def getDicTok(self):
         tok = dict()
+        #print(len(self.fileLines))
         for line in self.fileLines:
+            #print(line)
             lineWithoutSpace = re.sub(r'\s+', ' ', line)
+            #print(lineWithoutSpace)
             lineDiv = lineWithoutSpace.split(" ")
-            if len(lineDiv) == 4:
+            #print(str(len(lineDiv)))
+            if len(lineDiv) >= 3:
                 tok[lineDiv[0]] = float(lineDiv[1]), float(lineDiv[2])
         return tok
 
 
 if __name__ == '__main__':
-    tokReader = TokReader('1_AP')
+    tokReader = TokReader('hacking6')
     tok = tokReader.getDicTok()
     for word in tok:
         print(word + str(tok[word]))

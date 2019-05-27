@@ -5,6 +5,7 @@ from HTMLReader import *
 from Frecuencias import *
 from Postings import *
 from Weights import *
+from Indice import *
 
 def main():
     urlDoc = URLsReader()
@@ -42,7 +43,9 @@ def main():
     # Genera el archivo postings
     postings = Postings()
     postings.generatePostings(filesName)
-
+    # Genera el archivo indice
+    indice = Indice()
+    indice.generateIndice()
 
 if __name__ == '__main__':
     main()

@@ -17,15 +17,17 @@ class PostingsReader:
 
     # Metodo que devuelve un diccionario de lo que tiene el portings.txt
     # Llave: termino, aliasDocumento
-    # Valor: peso
+    # Valor: numeroLinea, peso
     def getDicPostings(self):
         postings = dict()
+        numberLine = 0
         for line in self.fileLines:
             lineWithoutSpace = re.sub(r'\s+', ' ', line)
             lineDiv = lineWithoutSpace.split(" ")
-            if len(lineDiv) == 4:
+            if len(lineDiv) >= 3:
                 llave = lineDiv[0], lineDiv[1]
-                postings[llave] = float(lineDiv[2])
+                postings[llave] = numberLine, float(lineDiv[2])
+                numberLine = numberLine + 1
         return postings
 
 
