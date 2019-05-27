@@ -6,6 +6,8 @@ class FileGenerator:
     numberCharacteresFreqInv = 20
     numberCharacteresWeight = 20
     numberCharacteresAlias = 30
+    numberCharacteresPosInitial = 12
+    numberCharacteresEntrys = 12
 
     # Funcion para rellenar espacios para que la hilera string quede de numberCharacteres de caracteres
     def formatNumberCharacters(self, numberCharacteres, string):
@@ -85,3 +87,22 @@ class FileGenerator:
         for wordFile in sorted(dictWeight.keys()):
             file.write(self.linePostings(wordFile[0], wordFile[1], dictWeight[wordFile]))
         print(fileName + "postings.txt generado")
+
+    # Funcion que crea una linea del archivo indice
+    def lineIndice(self, term, posInitial, entrys):
+        return self.formatNumberCharacters(self.numberCharacteresTerm, term) + ' ' + \
+               self.formatNumberCharacters(self.numberCharacteresPosInitial, posInitial) + ' ' + \
+               self.formatNnumberToString(self.numberCharacteresEntrys, entrys) + '\n'
+
+    # Metodo que genera el archivo indice
+    # 30 caracteres termino
+    # 1 espacio
+    # 12 espacios para la posición inicial dentro del archivo postings (numero de linea).
+    # 1 espacio en blanco
+    # 12 espacios para la cantidad de entradas dentro del archivo de Postings (el número de documentos donde aparece).
+    def indiceGenerate(self, fileName, dictPositngs):
+        fileSave = './DocumentosProcesados/indice/' + fileName + '.txt'
+        file = open(fileSave, 'w')
+        for word in sorted(dictPositngs.keys()):
+            file.write(self.linePostings(word, dictPositngs[word][0], dictPositngs[word][1]))
+        print(fileName + "indice.txt generado")
