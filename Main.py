@@ -4,7 +4,7 @@ from URLsReader import *
 from HTMLReader import *
 from Frecuencias import *
 from FileGenerator import *
-
+from Weights import *
 
 def main():
     urlDoc = URLsReader()
@@ -12,8 +12,10 @@ def main():
     title = urlDoc.getTitle()
     freq = Frecuencias()
     generador = FileGenerator()
+    filesName = []
     while(title is not None):
         fileName = re.sub('.html', '', str(title, 'utf-8-sig'))
+        filesName.append(fileName)
         html = HTMLReader(title)
         # Obtiene tod o el HTML del documento.
         htmlString = html.getHtml()
@@ -34,6 +36,9 @@ def main():
     # Genera el diccionario para obtener los datos para el vocabulario.
     freqInv = freq.generateVocabDic()
     generador.vocabularyGenerate('vocabulario', freqInv)
+    # Genera los archivos awt
+    weights = Weights()
+    weights.generateWtd(filesName)
 
 
 if __name__ == '__main__':
