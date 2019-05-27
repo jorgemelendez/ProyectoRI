@@ -5,7 +5,6 @@ from unicodedata import normalize
 class Rules:
     maxLength = 30
 
-
     #Regla para eliminar las etiquetas html
     def removeTagsHTML(self, stringDoc):
         return re.sub(r'<[^>]*?>', ' ', stringDoc)
@@ -29,7 +28,6 @@ class Rules:
 
     #Regla para quitar caracteres que no sean a-z, A-Z, 0-9, _
     def removeCharactersInvalid(self, stringDoc):
-        #return re.sub(r'[^\wa-zA-Z0-9]*[a-zA-Z0-9]*[^\wa-zA-Z0-9]*', '', stringDoc)
         return re.sub(r'[A-Za-z0-9]*[!@#$%^&*(),.?":;{}|\\<>\[\]][\w]*', ' ', stringDoc)
 
     #Regla para quitar tildes

@@ -4,7 +4,6 @@ class VocabularioReader:
     def __init__(self, docName):
         docName = str(docName)
         self.fileName = './DocumentosProcesados/vocabulario/' + docName + '.txt'
-
         # Se lee el archivo vocabulario
         self.file = open(self.fileName, "r")
         string = self.file.read()
@@ -23,7 +22,7 @@ class VocabularioReader:
         for line in self.fileLines:
             lineWithoutSpace = re.sub(r'\s+', ' ', line)
             lineDiv = lineWithoutSpace.split(" ")
-            if len(lineDiv) == 4:
+            if len(lineDiv) >= 3:
                 voc[lineDiv[0]] = float(lineDiv[1]), float(lineDiv[2])
         return voc
 

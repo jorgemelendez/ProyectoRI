@@ -2,7 +2,6 @@ class HTMLReader:
     def __init__(self, docName):
         docName = str(docName, 'utf-8-sig')
         self.fileName = './Coleccion/' + docName
-
         # Se tiene que cambiar el tipo de encoding del archivo y
         # se tiene que ignorar ciertos errores de caracteres que dice que no existen.
         self.file = open(self.fileName, "rb")

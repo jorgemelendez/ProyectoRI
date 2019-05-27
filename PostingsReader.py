@@ -4,12 +4,10 @@ class PostingsReader:
     def __init__(self, docName):
         docName = str(docName)
         self.fileName = './DocumentosProcesados/postings/' + docName + '.txt'
-
         # Se lee el archivo .wtd
         self.file = open(self.fileName, "r")
         string = self.file.read()
         self.fileLines = string.split("\n")
-
 
     # Metodo que devuelve el archivo
     def getLinesPostings(self):
@@ -29,7 +27,6 @@ class PostingsReader:
                 postings[llave] = numberLine, float(lineDiv[2])
                 numberLine = numberLine + 1
         return postings
-
 
 if __name__ == '__main__':
     tokReader = PostingsReader('postings')

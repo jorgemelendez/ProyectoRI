@@ -7,7 +7,6 @@ class Indice:
     # Llave: termino
     # Valor: posinicial, cantEntradas
     def getDicIndice(self):
-        #generator = FileGenerator()
         dicIndice = dict()
         postingsReader = PostingsReader('postings')
         dicPosting = postingsReader.getDicPostings()
@@ -21,15 +20,12 @@ class Indice:
             else:
                 palabrasNuevas = palabrasNuevas + 1
                 dicIndice[wordFile[0]] = dicPosting[wordFile][0], 1
-        #print(str(palabrasNuevas))
         return dicIndice
 
     def generateIndice(self):
         dicIndice = self.getDicIndice()
         generator = FileGenerator()
         generator.indiceGenerate('indice', dicIndice)
-
-
 
 # Main para prueba ver que genere los archivos .wtd
 if __name__ == '__main__':

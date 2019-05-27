@@ -4,7 +4,6 @@ class TokReader:
     def __init__(self, docName):
         docName = str(docName)
         self.fileName = './DocumentosProcesados/tok/' + docName + '.tok'
-
         # Se lee el archivo .tok
         self.file = open(self.fileName, "r")
         string = self.file.read()
@@ -19,13 +18,9 @@ class TokReader:
     # Valor: Frecuencia, FrecuenciaNormalizada
     def getDicTok(self):
         tok = dict()
-        #print(len(self.fileLines))
         for line in self.fileLines:
-            #print(line)
             lineWithoutSpace = re.sub(r'\s+', ' ', line)
-            #print(lineWithoutSpace)
             lineDiv = lineWithoutSpace.split(" ")
-            #print(str(len(lineDiv)))
             if len(lineDiv) >= 3:
                 tok[lineDiv[0]] = float(lineDiv[1]), float(lineDiv[2])
         return tok
