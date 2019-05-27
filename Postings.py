@@ -17,11 +17,12 @@ class Postings:
                 dicPostings[llave] = dicWtd[word]
         for posting in dicPostings:
             print(str(posting) + " " + str(dicPostings[posting]))
+        return dicPostings
 
     def generatePostings(self, filesName):
         dicPostings = self.getDicPostings(filesName)
         generator = FileGenerator()
-        generator.postings(dicPostings)
+        generator.postingsGenerate('postings', dicPostings)
 
 
 

@@ -25,7 +25,7 @@ class Weights:
         generator = FileGenerator()
         for file in filesName:
             dicWeights = self.getDicWeights(file)
-            generator.vocabularyWtd(file, dicWeights)
+            generator.wtdGenerate(file, dicWeights)
 
 # Main para prueba ver que genere los archivos .wtd
 if __name__ == '__main__':

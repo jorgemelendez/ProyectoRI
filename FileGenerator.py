@@ -5,6 +5,7 @@ class FileGenerator:
     numberCharacteresNumberDocument = 12
     numberCharacteresFreqInv = 20
     numberCharacteresWeight = 20
+    numberCharacteresAlias = 30
 
     # Funcion para rellenar espacios para que la hilera string quede de numberCharacteres de caracteres
     def formatNumberCharacters(self, numberCharacteres, string):
@@ -59,9 +60,28 @@ class FileGenerator:
     # 30 caracteres termino
     # 1 espacio
     # 20 espacios para el peso del termino en el documento
-    def vocabularyWtd(self, fileName, dictWeight):
+    def wtdGenerate(self, fileName, dictWeight):
         fileSave = './DocumentosProcesados/wtd/' + fileName + '.wtd'
         file = open(fileSave, 'w')
         for word in sorted(dictWeight.keys()):
             file.write(self.lineWtd(word, dictWeight[word]))
         print(fileName + ".wtd generado")
+
+    # Funcion que crea una linea del archivo postings
+    def linePostings(self, term, alias, peso):
+        return self.formatNumberCharacters(self.numberCharacteresTerm, term) + ' ' + \
+               self.formatNumberCharacters(self.numberCharacteresAlias, alias) + ' ' + \
+               self.formatNnumberToString(self.numberCharacteresWeight, peso) + '\n'
+
+    # Metodo que genera el archivo postings
+    # 30 caracteres termino
+    # 1 espacio
+    # 30 espacios para el alias del archivo
+    # 1 espacio en blanco
+    # 20 espacios para el peso del termino en el documento
+    def postingsGenerate(self, fileName, dictWeight):
+        fileSave = './DocumentosProcesados/postings/' + fileName + '.txt'
+        file = open(fileSave, 'w')
+        for wordFile in sorted(dictWeight.keys()):
+            file.write(self.linePostings(wordFile[0], wordFile[1], dictWeight[wordFile]))
+        print(fileName + "postings.txt generado")

@@ -3,7 +3,7 @@ from DocWordCounter import *
 from URLsReader import *
 from HTMLReader import *
 from Frecuencias import *
-from FileGenerator import *
+from Postings import *
 from Weights import *
 
 def main():
@@ -39,6 +39,9 @@ def main():
     # Genera los archivos awt
     weights = Weights()
     weights.generateWtd(filesName)
+    # Genera el archivo postings
+    postings = Postings()
+    postings.generatePostings(filesName)
 
 
 if __name__ == '__main__':
